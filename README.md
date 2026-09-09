@@ -57,13 +57,12 @@ No complete rewrite is planned at the beginning. The first objective is to deter
 
 | Component | Status |
 |---|---|
-| Original Android project | Working baseline |
-| Kotlin Multiplatform | Experimental |
-| Desktop compilation | Not yet evaluated |
-| Desktop runtime | Not yet evaluated |
+| Kotlin Multiplatform | in development |
+| Desktop compilation | failing |
+| Desktop runtime | 3:04m |
 | Shared logic | Under investigation |
 | Desktop playback | Not implemented |
-| Desktop UI | Not implemented |
+| Desktop UI | in development |
 | Production release | Not planned |
 
 ## Experimental Fork
