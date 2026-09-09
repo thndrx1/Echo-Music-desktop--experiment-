@@ -10,19 +10,16 @@ android {
     compileSdk = 36
     defaultConfig { minSdk = 26 }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
-    }
-    flavorDimensions += "variant"
-    productFlavors {
-        create("gms") { dimension = "variant" }
-        create("foss") { dimension = "variant" }
     }
 }
 kotlin { jvmToolchain(21) }
 dependencies {
+    coreLibraryDesugaring(libs.desugaring)
     implementation(project(":core"))
-    "gmsImplementation"(libs.cast.framework)
+    implementation(libs.cast.framework)
     api(libs.media3)
     api(libs.media3.session)
     api(libs.media3.hls)

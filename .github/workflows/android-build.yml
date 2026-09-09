@@ -57,7 +57,7 @@ jobs:
           -keyalg RSA \
           -validity 10000
         chmod +x gradlew
-        ./gradlew assembleUniversalFossDebug
+        ./gradlew assembleUniversalGmsDebug
 
     - name: Upload Universal APK
       uses: actions/upload-artifact@v4

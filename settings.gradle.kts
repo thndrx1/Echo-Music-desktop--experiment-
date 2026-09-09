@@ -8,6 +8,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
         maven { setUrl("https://maven.aliyun.com/repository/public") }
+        maven { setUrl("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
     }
 }
 
@@ -18,7 +19,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "echomusic"
 include(
-    ":app",
+    // ":app",
     ":innertube",
     ":paxsenixlyrics",
     ":kugou",
@@ -34,7 +35,8 @@ include(
     ":unison",
     ":core",
     ":lyrics",
-    ":playback"
+    ":playback",
+    ":pc"
 )
 
 

@@ -153,6 +153,7 @@ mostly-independent feature/integration:
 | `:playback` | Pure ExoPlayer/Media3 logic — Queues, Equalizer, ChunkingDataSource, SleepTimer, BeatAnalyzer |
 | `:lyrics` | Lyrics orchestration — LyricsHelper, LyricsEntry, LyricsUtils, all provider impls, AI translation |
 | `:innertube` | YouTube Music InnerTube API client (the core music source) |
+| `:pc` | Desktop (Windows/Linux/macOS) target using Compose Multiplatform. Ported UI shell, theme, and core components. |
 | `:kugou`, `:lrclib`, `:betterlyrics`, `:youlyplus`, `:paxsenixlyrics`, `:simpmusic` | Individual lyrics source providers (each consumed by `:lyrics`) |
 | `:shazamkit` | Music recognition ("Echo Find") |
 | `:canvas`, `:echomusiccanvas`, `:applecanvas` | Canvas-style looping video backgrounds for tracks (different providers) |
@@ -271,6 +272,12 @@ dimension is unchanged: `universal`, `arm64`, `armeabi`, `x86`, `x86_64`.
 ```bash
 # Debug build
 ./gradlew assembleUniversalGmsDebug
+
+# Desktop (PC) build
+./gradlew :pc:run                 # Run desktop app
+./gradlew :pc:packageMsi          # Windows MSI installer
+./gradlew :pc:packageExe          # Windows EXE installer
+./gradlew :pc:createDistributable # Standalone folder with executable
 
 # Release build (needs signing env vars: STORE_PASSWORD, KEY_ALIAS,
 # KEY_PASSWORD and app/keystore/release.keystore)

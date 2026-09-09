@@ -8,13 +8,21 @@ android {
     compileSdk = 36
     defaultConfig { minSdk = 26 }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/NOTICE.md"
+        }
     }
 }
 kotlin { jvmToolchain(21) }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugaring)
     implementation(project(":core"))
     implementation(project(":unison"))
     implementation(project(":lrclib"))

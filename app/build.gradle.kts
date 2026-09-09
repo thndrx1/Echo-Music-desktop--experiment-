@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Properties
 import java.net.URL
 
@@ -72,16 +73,10 @@ android {
 
     flavorDimensions += listOf("abi", "variant")
     productFlavors {
-        // FOSS variant (default) - F-Droid compatible, no Google Play Services
-        create("foss") {
-            dimension = "variant"
-            isDefault = true
-            buildConfigField("Boolean", "CAST_AVAILABLE", "false")
-        }
-
         // GMS variant - with Google Cast support (requires Google Play Services)
         create("gms") {
             dimension = "variant"
+            isDefault = true
             buildConfigField("Boolean", "CAST_AVAILABLE", "true")
         }
 
@@ -165,11 +160,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlin {
-        jvmToolchain(21)
-        compilerOptions {
-            freeCompilerArgs.add("-Xannotation-default-target=param-property")
-            jvmTarget.set(JvmTarget.JVM_21)
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/NOTICE.md"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/DEPENDENCIES"
         }
     }
 
@@ -235,7 +231,7 @@ protobuf {
 ksp {
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         freeCompilerArgs.addAll(
             "-opt-in=kotlin.RequiresOptIn"

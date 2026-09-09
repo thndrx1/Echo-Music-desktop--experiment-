@@ -1,7 +1,6 @@
 package com.music.innertube
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -30,7 +29,7 @@ object NetworkConfig {
     fun createOptimizedHttpClient(
         cacheDir: File? = null,
         enableCache: Boolean = true
-    ): HttpClient = HttpClient(OkHttp) {
+    ): HttpClient = HttpClient {
         expectSuccess = true
 
         install(ContentNegotiation) {
@@ -51,24 +50,6 @@ object NetworkConfig {
             requestTimeoutMillis = REQUEST_TIMEOUT_MILLIS
             connectTimeoutMillis = CONNECT_TIMEOUT_SECONDS * 1000
             socketTimeoutMillis = READ_TIMEOUT_SECONDS * 1000
-        }
-
-        engine {
-            config {
-                // Timeout configurations
-                connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                writeTimeout(WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                
-                // Retry configuration
-                retryOnConnectionFailure(true)
-                
-                // Cache configuration
-                if (enableCache) {
-                    val cacheDirectory = cacheDir ?: File(System.getProperty("java.io.tmpdir"), "echomusic_http_cache")
-                    cache(okhttp3.Cache(cacheDirectory, CACHE_SIZE_MB))
-                }
-            }
         }
     }
     
